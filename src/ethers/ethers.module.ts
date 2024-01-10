@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { EthersProcessor } from './ethers.processor';
+import { ethersProvider } from './ethers.provider';
 
 @Module({
-  providers: [EthersProcessor],
+  providers: [ethersProvider, EthersProcessor],
 })
 export class EthersModule {}
