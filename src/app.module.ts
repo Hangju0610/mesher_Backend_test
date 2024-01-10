@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ethersModule } from './ethers/\bethers.module';
+import { EthersModule } from './ethers/\bethers.module';
 
 @Module({
-  imports: [ethersModule],
+  imports: [EthersModule],
   providers: [],
 })
 export class AppModule {}

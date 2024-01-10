@@ -1,9 +1,9 @@
-import { OnApplicationBootstrap, OnModuleInit } from '@nestjs/common';
+import { OnApplicationBootstrap } from '@nestjs/common';
 import { ethers } from 'ethers';
 /**
  * 블록체인 데이터 조회를 위한 ethers 연결 Providers
  */
-export class ethersProvider implements OnApplicationBootstrap {
+export class EthersProcessor implements OnApplicationBootstrap {
   onApplicationBootstrap() {
     const provider = new ethers.providers.InfuraProvider();
     console.log(
