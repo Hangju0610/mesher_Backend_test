@@ -18,4 +18,12 @@ export class BlockService {
   async findBlockByHash(hash: string): Promise<Block> {
     return await this.blockRepository.findOneBy({ hash });
   }
+
+  /**
+   * Block 개수를 전달하기 위한 Methods
+   * @returns blockCount
+   */
+  async countBlocks(): Promise<number> {
+    return await this.blockRepository.count();
+  }
 }
