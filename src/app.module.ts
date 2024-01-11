@@ -7,6 +7,7 @@ import { TxReceiptModule } from './txreceipt/txreceipt.module';
 import { AlarmModule } from './alarm/alarm.module';
 import ormConfig from './config/orm.config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { BlocklogModule } from './blocklog/blocklog.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     BlockModule,
     TxReceiptModule,
     AlarmModule,
+    BlocklogModule,
   ],
   providers: [],
 })
