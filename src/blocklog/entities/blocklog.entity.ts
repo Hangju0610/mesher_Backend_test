@@ -16,7 +16,7 @@ export class BlockLog {
   @Column()
   data: string;
 
-  @Column({ array: true, type: 'string' })
+  @Column({ type: 'text', array: true })
   topics: string[];
 
   @Column()

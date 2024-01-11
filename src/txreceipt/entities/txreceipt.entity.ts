@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class TxReceipt {
-  @PrimaryColumn({ type: 'string' })
+  @PrimaryColumn()
   transactionHash: string;
 
   @ManyToOne(() => Block, (block) => block.transactions)

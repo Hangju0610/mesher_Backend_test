@@ -4,7 +4,7 @@ import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Block {
-  @PrimaryColumn({ type: 'string' })
+  @PrimaryColumn()
   hash: string;
 
   @Column()
