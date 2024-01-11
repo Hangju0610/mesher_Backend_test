@@ -27,7 +27,8 @@ import ormConfig from './config/orm.config';
         };
       },
     }),
-    EthersModule,
+    // Controller, Service 완성 전까지 모듈 사용 진행 금지.
+    // EthersModule,
     BlockModule,
   ],
   providers: [],
