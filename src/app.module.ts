@@ -6,6 +6,7 @@ import { BlockModule } from './block/block.module';
 import { TxReceiptModule } from './txreceipt/txreceipt.module';
 import { AlarmModule } from './alarm/alarm.module';
 import ormConfig from './config/orm.config';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import ormConfig from './config/orm.config';
       isGlobal: true,
       load: [ormConfig],
     }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
