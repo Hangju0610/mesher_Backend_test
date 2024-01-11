@@ -55,8 +55,9 @@ export class AlarmService {
             fields: [
               {
                 // 제목
-                title: 'Server 상태 확인',
-                value: 'AppServer: 양호,
+                title: 'Server 정상 동작 중',
+                value: `AppServer: 양호
+                ethersNetwork: 양호`,
               },
             ],
             ts: Math.floor(new Date().getTime() / 1000).toString(),
@@ -64,6 +65,5 @@ export class AlarmService {
         ],
       });
     }
-
   }
 }
