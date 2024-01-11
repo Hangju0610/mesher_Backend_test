@@ -6,5 +6,6 @@ import { BlockLog } from './entities/blocklog.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([BlockLog])],
   providers: [BlockLogService],
+  exports: [BlockLogService],
 })
 export class BlockLogModule {}

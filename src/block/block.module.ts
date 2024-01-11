@@ -10,5 +10,6 @@ import { BlockLog } from 'src/blocklog/entities/blocklog.entity';
   imports: [TypeOrmModule.forFeature([Block, TxReceipt, BlockLog])],
   controllers: [BlockController],
   providers: [BlockService],
+  exports: [BlockService],
 })
 export class BlockModule {}
