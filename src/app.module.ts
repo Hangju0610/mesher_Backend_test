@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlockModule } from './block/block.module';
 import { TxReceiptModule } from './txreceipt/txreceipt.module';
+import { AlarmModule } from './alarm/alarm.module';
 import ormConfig from './config/orm.config';
 
 @Module({
@@ -32,6 +33,7 @@ import ormConfig from './config/orm.config';
     // EthersModule,
     BlockModule,
     TxReceiptModule,
+    AlarmModule,
   ],
   providers: [],
 })
