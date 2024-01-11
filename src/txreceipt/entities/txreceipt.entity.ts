@@ -40,8 +40,9 @@ export class TxReceipt {
   @Column()
   logsBloom: string;
 
-  @Column()
-  confirmations: number;
+  // Column에서 삭제 진행 후 ? 옵셔널 표기 진행
+  // @Column()
+  confirmations?: number;
 
   @Column()
   cumulativeGasUsed: string;
