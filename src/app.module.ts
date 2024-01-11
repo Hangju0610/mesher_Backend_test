@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { EthersModule } from './ethers/ethers.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BlockModule } from './block/block.module';
 import ormConfig from './config/orm.config';
 
 @Module({
@@ -27,6 +28,7 @@ import ormConfig from './config/orm.config';
       },
     }),
     EthersModule,
+    BlockModule,
   ],
   providers: [],
 })
