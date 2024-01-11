@@ -4,14 +4,21 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BlockModule } from './block/block.module';
 import { TxReceiptModule } from './txreceipt/txreceipt.module';
+import { AlarmModule } from './alarm/alarm.module';
 import ormConfig from './config/orm.config';
+import { ScheduleModule } from '@nestjs/schedule';
+import { BlockLogModule } from './blocklog/blocklog.module';
+import slackConfig from './config/slack.config';
+import { APP_FILTER } from '@nestjs/core';
+import { AllExceptions } from './common/filter/exception.filter';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [ormConfig],
+      load: [ormConfig, slackConfig],
     }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
@@ -29,10 +36,17 @@ import ormConfig from './config/orm.config';
       },
     }),
     // Controller, Service 완성 전까지 모듈 사용 진행 금지.
-    // EthersModule,
+    EthersModule,
     BlockModule,
     TxReceiptModule,
+    BlockLogModule,
+    AlarmModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptions,
+    },
+  ],
 })
 export class AppModule {}
