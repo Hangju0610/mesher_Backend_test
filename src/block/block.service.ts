@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Block } from './entities/block.entity';
@@ -16,7 +16,11 @@ export class BlockService {
    * @returns {Block}
    */
   async findBlockByHash(hash: string): Promise<Block> {
-    return await this.blockRepository.findOneBy({ hash });
+    const block = await this.blockRepository.findOneBy({ hash });
+    if (!block) {
+      throw new NotFoundException('Block을 찾을 수 없습니다.');
+    }
+    return block;
   }
 
   /**
