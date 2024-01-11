@@ -7,7 +7,7 @@ import { Block } from './entities/block.entity';
 export class BlockService {
   constructor(
     @InjectRepository(Block)
-    private readonly blockRepository: Repository<Block>,
+    private blockRepository: Repository<Block>,
   ) {}
 
   /**

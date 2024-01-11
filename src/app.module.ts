@@ -7,13 +7,14 @@ import { TxReceiptModule } from './txreceipt/txreceipt.module';
 import { AlarmModule } from './alarm/alarm.module';
 import ormConfig from './config/orm.config';
 import { ScheduleModule } from '@nestjs/schedule';
-import { BlocklogModule } from './blocklog/blocklog.module';
+import { BlockLogModule } from './blocklog/blocklog.module';
+import slackConfig from './config/slack.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [ormConfig],
+      load: [ormConfig, slackConfig],
     }),
     ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
@@ -36,8 +37,8 @@ import { BlocklogModule } from './blocklog/blocklog.module';
     // EthersModule,
     BlockModule,
     TxReceiptModule,
+    BlockLogModule,
     AlarmModule,
-    BlocklogModule,
   ],
   providers: [],
 })
