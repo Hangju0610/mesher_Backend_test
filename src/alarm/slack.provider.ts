@@ -5,7 +5,6 @@ export const slackProvider = {
   provide: 'SLACK',
   inject: [ConfigService],
   useFactory: (configService: ConfigService): IncomingWebhook => {
-    console.log(configService.get('slack.webHook'));
     const SlackWebHook = new IncomingWebhook(
       configService.get('slack.webHook'),
     );

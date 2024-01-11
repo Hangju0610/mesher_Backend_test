@@ -9,5 +9,6 @@ import { EthersModule } from 'src/ethers/ethers.module';
 @Module({
   imports: [BlockModule, BlockLogModule, TxReceiptModule, EthersModule],
   providers: [slackProvider, AlarmService],
+  exports: [slackProvider],
 })
 export class AlarmModule {}
