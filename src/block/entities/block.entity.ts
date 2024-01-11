@@ -53,9 +53,7 @@ export class Block {
   extraData: string;
 
   @ApiProperty({ type: TxReceipt, isArray: true })
-  @OneToMany(() => TxReceipt, (txReceipt) => txReceipt.block, {
-    eager: true,
-  })
+  @OneToMany(() => TxReceipt, (txReceipt) => txReceipt.block, {})
   transactions: TxReceipt[];
 
   // @ApiProperty({ type: BlockLog, isArray: true })
