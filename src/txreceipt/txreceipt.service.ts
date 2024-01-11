@@ -33,4 +33,26 @@ export class TxReceiptService {
       ...a,
     };
   }
+
+  async findReceiptByFromOrTo(
+    from?: string,
+    to?: string,
+  ): Promise<TxReceiptResDto> {
+    const whereCondition = from ? { from } : { to };
+    const a = await this.txReceiptRepository.findOne({
+      where: whereCondition,
+      relations: { block: true },
+      select: {
+        block: {
+          hash: true,
+          number: true,
+        },
+      },
+    });
+    return {
+      blockHash: a.block.hash,
+      blockNumber: a.block.number,
+      ...a,
+    };
+  }
 }
