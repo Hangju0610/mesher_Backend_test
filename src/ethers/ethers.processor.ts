@@ -108,5 +108,13 @@ export class EthersProcessor implements OnApplicationBootstrap {
       // });
     });
   }
-  private async getTxsReceipt() {}
+  async ethersCheck(): Promise<boolean> {
+    try {
+      // 서버를 테스트하기 위해 getNetwork 메서드 사용
+      this.ethersProvider.getNetwork();
+      return true;
+    } catch {
+      return false;
+    }
+  }
 }

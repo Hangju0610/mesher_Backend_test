@@ -9,5 +9,6 @@ import { BlockLog } from 'src/blocklog/entities/blocklog.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Block, TxReceipt, BlockLog])],
   providers: [ethersProvider, EthersProcessor],
+  exports: [EthersProcessor],
 })
 export class EthersModule {}
