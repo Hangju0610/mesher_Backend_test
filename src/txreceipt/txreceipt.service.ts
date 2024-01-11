@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TxReceipt } from './entities/txreceipt.entity';
 import { Repository } from 'typeorm';
 import { TxReceiptResDto } from './dto/res.dto';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class TxReceiptService {
@@ -17,7 +18,7 @@ export class TxReceiptService {
    * @returns
    */
   async findReceiptByHash(transactionHash: string): Promise<TxReceiptResDto> {
-    const a = await this.txReceiptRepository.findOne({
+    const TxReceipt = await this.txReceiptRepository.findOne({
       where: { transactionHash },
       relations: { block: true },
       select: {
@@ -27,10 +28,13 @@ export class TxReceiptService {
         },
       },
     });
+    if (!TxReceipt) {
+      throw new NotFoundException('조회된 데이터가 없습니다.');
+    }
     return {
-      blockHash: a.block.hash,
-      blockNumber: a.block.number,
-      ...a,
+      blockHash: TxReceipt.block.hash,
+      blockNumber: TxReceipt.block.number,
+      ...TxReceipt,
     };
   }
 
@@ -39,7 +43,7 @@ export class TxReceiptService {
     to?: string,
   ): Promise<TxReceiptResDto> {
     const whereCondition = from ? { from } : { to };
-    const a = await this.txReceiptRepository.findOne({
+    const TxReceipt = await this.txReceiptRepository.findOne({
       where: whereCondition,
       relations: { block: true },
       select: {
@@ -49,10 +53,13 @@ export class TxReceiptService {
         },
       },
     });
+    if (!TxReceipt) {
+      throw new NotFoundException('조회된 데이터가 없습니다.');
+    }
     return {
-      blockHash: a.block.hash,
-      blockNumber: a.block.number,
-      ...a,
+      blockHash: TxReceipt.block.hash,
+      blockNumber: TxReceipt.block.number,
+      ...TxReceipt,
     };
   }
 }
