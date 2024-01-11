@@ -59,7 +59,6 @@ export class EthersProcessor implements OnApplicationBootstrap {
               gasUsed: txReceipt.gasUsed.toString(),
               effectiveGasPrice: txReceipt.effectiveGasPrice.toString(),
               logsBloom: txReceipt.logsBloom,
-              confirmations: txReceipt.confirmations,
               cumulativeGasUsed: txReceipt.cumulativeGasUsed.toString(),
               byzantium: txReceipt.byzantium,
               status: txReceipt.status,
