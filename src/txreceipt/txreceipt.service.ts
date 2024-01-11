@@ -63,6 +63,10 @@ export class TxReceiptService {
     };
   }
 
+  /**
+   * Receipt의 개수를 확인하기 위한 메서드
+   * @returns TxsReceiptCount
+   */
   async countTxReceipts(): Promise<number> {
     return await this.txReceiptRepository.count();
   }
