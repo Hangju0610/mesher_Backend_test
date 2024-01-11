@@ -10,7 +10,9 @@ export class TxReceipt {
   @ManyToOne(() => Block, (block) => block.transactions)
   block: Block;
 
-  @OneToMany(() => BlockLog, (blockLog) => blockLog.transaction)
+  @OneToMany(() => BlockLog, (blockLog) => blockLog.transaction, {
+    eager: true,
+  })
   blockLog: BlockLog[];
 
   @Column()

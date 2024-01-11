@@ -34,7 +34,9 @@ export class Block {
   @Column()
   extraData: string;
 
-  @OneToMany(() => TxReceipt, (txReceipt) => txReceipt.block)
+  @OneToMany(() => TxReceipt, (txReceipt) => txReceipt.block, {
+    eager: true,
+  })
   transactions: TxReceipt[];
 
   @OneToMany(() => BlockLog, (blockLog) => blockLog.block)

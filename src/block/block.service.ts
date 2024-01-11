@@ -10,5 +10,12 @@ export class BlockService {
     private readonly blockRepository: Repository<Block>,
   ) {}
 
-  async findBlockByHash(hash: string): Promise<Block> {}
+  /**
+   * Hash를 통해 블록을 조회하는 메서드
+   * @param {string} hash Block의 hash
+   * @returns {Block}
+   */
+  async findBlockByHash(hash: string): Promise<Block> {
+    return await this.blockRepository.findOneBy({ hash });
+  }
 }
