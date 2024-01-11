@@ -62,4 +62,8 @@ export class TxReceiptService {
       ...TxReceipt,
     };
   }
+
+  async countTxReceipts(): Promise<number> {
+    return await this.txReceiptRepository.count();
+  }
 }
