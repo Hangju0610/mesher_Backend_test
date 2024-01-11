@@ -34,9 +34,6 @@ export class Block {
   @Column()
   extraData: string;
 
-  @Column()
-  baseFeePerGas: string;
-
   @OneToMany(() => TxReceipt, (txReceipt) => txReceipt.block)
   transactions: TxReceipt[];
 
