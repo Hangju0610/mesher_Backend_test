@@ -15,10 +15,10 @@ export class TxReceipt {
   @ManyToOne(() => Block, (block) => block.transactions)
   block: Block;
 
-  @ApiProperty({ type: BlockLog, isArray: true })
   @OneToMany(() => BlockLog, (blockLog) => blockLog.transaction, {
     eager: true,
   })
+  @ApiProperty({ type: BlockLog, isArray: true })
   blockLog: BlockLog[];
 
   @ApiProperty({ example: 1 })

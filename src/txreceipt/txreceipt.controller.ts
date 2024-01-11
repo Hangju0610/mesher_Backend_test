@@ -1,8 +1,11 @@
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiExtraModels, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { TxReceipt } from './entities/txreceipt.entity';
 import { TxReceiptService } from './txreceipt.service';
 import { Controller, Get, Query } from '@nestjs/common';
+import { BlockLog } from 'src/blocklog/entities/blocklog.entity';
 
+@ApiTags('TxReceipt')
+@ApiExtraModels(BlockLog)
 @Controller('txreceipts')
 export class TxReceiptController {
   constructor(private readonly txReceiptService: TxReceiptService) {}
