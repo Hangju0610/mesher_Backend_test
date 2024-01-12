@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Block } from './entities/block.entity';
+import { BlockResDto } from './dto/res.dto';
 
 @Injectable()
 export class BlockService {
@@ -15,8 +16,16 @@ export class BlockService {
    * @param {string} hash Block의 hash
    * @returns {Block}
    */
-  async findBlockByHash(hash: string): Promise<Block> {
-    const block = await this.blockRepository.findOneBy({ hash });
+  async findBlockByHash(hash: string): Promise<BlockResDto> {
+    const block = await this.blockRepository.findOne({
+      where: { hash },
+      relations: {
+        transactions: true,
+      },
+      select: {
+        transactions: true,
+      },
+    });
     if (!block) {
       throw new NotFoundException('Block을 찾을 수 없습니다.');
     }
