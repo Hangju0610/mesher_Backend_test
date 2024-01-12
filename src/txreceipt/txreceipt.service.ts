@@ -1,9 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TxReceipt } from './entities/txreceipt.entity';
 import { Repository } from 'typeorm';
 import { TxReceiptResDto } from './dto/res.dto';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class TxReceiptService {
@@ -18,7 +21,7 @@ export class TxReceiptService {
    * @returns
    */
   async findReceiptByHash(transactionHash: string): Promise<TxReceiptResDto> {
-    const TxReceipt = await this.txReceiptRepository.findOne({
+    const txReceipt = await this.txReceiptRepository.findOne({
       where: { transactionHash },
       relations: { block: true },
       select: {
@@ -28,22 +31,32 @@ export class TxReceiptService {
         },
       },
     });
-    if (!TxReceipt) {
+    if (!txReceipt) {
       throw new NotFoundException('조회된 데이터가 없습니다.');
     }
     return {
-      blockHash: TxReceipt.block.hash,
-      blockNumber: TxReceipt.block.number,
-      ...TxReceipt,
+      blockHash: txReceipt.block.hash,
+      blockNumber: txReceipt.block.number,
+      ...txReceipt,
     };
   }
 
-  async findReceiptByFromOrTo(
+  /**
+   * address 주소를 통해 찾는 메서드입니다. from 혹은 to를 입력해주어야 합니다.
+   * 검색 조건이 없는 경우, 에러를 반환합니다.
+   * @param from fromHash
+   * @param to toHash
+   * @returns
+   */
+  async findReceiptByAddress(
     from?: string,
     to?: string,
-  ): Promise<TxReceiptResDto> {
+  ): Promise<TxReceiptResDto[]> {
+    if (!from && !to) {
+      throw new BadRequestException('검색 조건을 입력해주세요.');
+    }
     const whereCondition = from ? { from } : { to };
-    const TxReceipt = await this.txReceiptRepository.findOne({
+    const txReceipts = await this.txReceiptRepository.find({
       where: whereCondition,
       relations: { block: true },
       select: {
@@ -53,14 +66,13 @@ export class TxReceiptService {
         },
       },
     });
-    if (!TxReceipt) {
-      throw new NotFoundException('조회된 데이터가 없습니다.');
-    }
-    return {
-      blockHash: TxReceipt.block.hash,
-      blockNumber: TxReceipt.block.number,
-      ...TxReceipt,
-    };
+    return txReceipts.map((txReceipt) => {
+      return {
+        blockHash: txReceipt.block.hash,
+        blockNumber: txReceipt.block.number,
+        ...txReceipt,
+      };
+    });
   }
 
   /**
