@@ -30,8 +30,8 @@ import { AllExceptions } from './common/filter/exception.filter';
           username: configService.get('postgres.username'),
           password: configService.get('postgres.password'),
           autoLoadEntities: true,
-          synchronize: false,
-          logging: true,
+          synchronize: true,
+          logging: false,
         };
       },
     }),
