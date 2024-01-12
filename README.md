@@ -4,17 +4,21 @@
 
 Nest.js, Typescript, Ethers.js, Docker, postgreSQL, TypeORM, slackWebHook
 
+### 회고 진행 Notion
+
+https://hangju0610.notion.site/mesher-109ce29c643a4a1bbd3aae63bd53fec9?pvs=4
+
 ### ERD
 
 ERD 주소 : https://dbdiagram.io/d/mesher_test-659e9f72ac844320aea2c986
 
-![Alt text](image-1.png)
+![ERD](/images/image-1.png)
 
 ### API 명세서
 
 서버 동작 후 localhost:3000/docs를 통해 확인할 수 있습니다.
 
-![API 명세서](image.png)
+![API 명세서](/images/image.png)
 
 ### 회고록
 
