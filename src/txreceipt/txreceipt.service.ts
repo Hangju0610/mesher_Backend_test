@@ -8,6 +8,10 @@ import { TxReceipt } from './entities/txreceipt.entity';
 import { Repository } from 'typeorm';
 import { TxReceiptResDto } from './dto/res.dto';
 
+type WhereCondition = {
+  from?: string;
+  to?: string;
+};
 @Injectable()
 export class TxReceiptService {
   constructor(
@@ -55,7 +59,13 @@ export class TxReceiptService {
     if (!from && !to) {
       throw new BadRequestException('검색 조건을 입력해주세요.');
     }
-    const whereCondition = from ? { from } : { to };
+    let whereCondition: WhereCondition;
+    if (from) {
+      whereCondition.from = from;
+    }
+    if (to) {
+      whereCondition.to = to;
+    }
     const txReceipts = await this.txReceiptRepository.find({
       where: whereCondition,
       relations: { block: true },
