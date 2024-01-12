@@ -3,7 +3,7 @@ import { Block } from 'src/block/entities/block.entity';
 import { TxReceipt } from 'src/txreceipt/entities/txreceipt.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'Log' })
 export class BlockLog {
   @ApiProperty({ description: 'DB에 저장되기 위해 지정한 PK', example: 13 })
   @PrimaryGeneratedColumn()
@@ -21,7 +21,7 @@ export class BlockLog {
     example:
       '0x00000000000000000000000000000000000000000000033d4b40eb81dcfdfa50',
   })
-  @Column()
+  @Column({ type: 'text' })
   data: string;
 
   @ApiProperty({
